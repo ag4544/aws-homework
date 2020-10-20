@@ -1,0 +1,22 @@
+---
+- name: Install java
+  apt:
+    name: default-jdk
+    state: present
+
+- name: Install tomcat
+  apt:
+    name: tomcat9
+    state: present
+
+- name: Remove ROOT dir from tomcat 
+  file:
+    path: /var/lib/tomcat9/webapps/ROOT
+    state: absent
+
+- name: Download war file from nexus
+  get_url:
+    url: https://nexus.agwes.net/repository/maven-releases/com/boxfuse/samples/hello/1.0/hello-1.0.war
+    dest: /var/lib/tomcat9/webapps/ROOT.war
+  notify: 
+  - restart tomcat9

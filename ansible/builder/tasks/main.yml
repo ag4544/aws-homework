@@ -1,0 +1,30 @@
+---
+- name: install git
+  apt:
+    name: git
+    state: present
+
+- name: Clone source code from git
+  git:
+    repo: https://github.com/ag4544/boxfuse-sample.git
+    dest: /var/boxfuse-sample/
+
+- name: Install java
+  apt:
+    name: default-jdk
+    state: present
+
+- name: install maven
+  apt:
+    name: maven
+    state: present
+
+- name: Copy settings for maven
+  copy:
+    src: settings.xml
+    dest: /etc/maven/settings.xml
+      
+- name: deploy and push to nexus
+  shell: mvn deploy
+  args:
+    chdir: /var/boxfuse-sample/

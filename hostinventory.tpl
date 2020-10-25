@@ -1,8 +1,9 @@
+
 ---
 all:
   hosts:
   vars:
-    ansible_user: admin
+    ansible_user: debian
     ansible_ssh_private_key_file: ~/.ssh/ansible_tasks
     ansible_python_interpreter: /usr/bin/python3
     ansible_become: yes
